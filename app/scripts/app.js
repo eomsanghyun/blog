@@ -1,37 +1,27 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name myHomePageApp
- * @description
- * # myHomePageApp
- *
- * Main module of the application.
- */
-angular
-  .module('myHomePageApp', [
-    'ngAnimate',
-    'ngAria',
-    'ngCookies',
-    'ngMessages',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+
+angular.module('myHomePageApp', [
+   'ui.router',
+   'ngResource'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
+
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('app',{
+          url:'/',
+          views: {
+              'header': {
+                  templateUrl:'views/header.html'
+              },
+              'content': {  
+                  templateUrl:'views/main.html'
+              },
+              'footer': {
+                  templateUrl:'views/footer.html'
+              }
+          }
       });
+
+      $urlRouterProvider.otherwise('/');
   });
